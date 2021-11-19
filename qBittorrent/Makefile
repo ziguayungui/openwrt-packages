@@ -20,8 +20,6 @@ PKG_LICENSE:=GPL-2.0+
 PKG_LICENSE_FILES:=COPYING
 PKG_CPE_ID:=cpe:/a:qbittorrent:qbittorrent
 
-PKG_BUILD_DEPENDS:=qttools
-
 PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 PKG_USE_MIPS16:=0
@@ -33,11 +31,7 @@ define Package/qbittorrent
 	CATEGORY:=Network
 	SUBMENU:=BitTorrent
 	DEPENDS:=+libgcc +libstdcpp \
-		+rblibtorrent \
 		+libopenssl \
-		+qt5-core \
-		+qt5-network \
-		+qt5-xml \
 		+zlib
 	TITLE:=bittorrent client programmed in C++ / Qt
 	URL:=https://www.qbittorrent.org/
