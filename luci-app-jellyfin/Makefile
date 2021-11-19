@@ -7,7 +7,7 @@ PKG_RELEASE:=20211103
 
 LUCI_TITLE:=LuCI support for jellyfin
 LUCI_PKGARCH:=all
-LUCI_DEPENDS:=+docker +luci-app-dockerman
+LUCI_DEPENDS:=+docker +dockerd +luci-app-dockerman 
 
 define Package/luci-app-jellyfin/conffiles
 /etc/config/jellyfin

@@ -8,7 +8,7 @@ PKG_RELEASE:=20210923
 
 LUCI_TITLE:=LuCI support for homeassistant
 LUCI_PKGARCH:=all
-LUCI_DEPENDS:=+docker
+LUCI_DEPENDS:=+docker +dockerd +luci-app-dockerman
 
 include $(TOPDIR)/feeds/luci/luci.mk
 
