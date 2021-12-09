@@ -15,6 +15,10 @@ PKG_BUILD_DEPENDS:=golang/host homebox/host
 PKG_BUILD_PARALLEL:=1
 PKG_USE_MIPS16:=0
 
+PKG_CONFIG_DEPENDS:= \
+	CONFIG_HOMEBOX_COMPRESS_GOPROXY \
+	CONFIG_HOMEBOX_COMPRESS_UPX
+
 HOST_BUILD_DEPENDS:=node/host
 HOST_BUILD_DIR:=$(BUILD_DIR_HOST)/${PKG_NAME}
 
@@ -35,6 +39,21 @@ endef
 define Package/$(PKG_NAME)/description
   A Toolbox for Home Local Networks Speed Test
 endef
+
+define Package/$(PKG_NAME)/config
+config HOMEBOX_COMPRESS_GOPROXY
+	bool "Compiling with GOPROXY proxy"
+	default n
+
+config HOMEBOX_COMPRESS_UPX
+	bool "Compress executable files with UPX"
+	default y
+endef
+
+ifeq ($(CONFIG_HOMEBOX_COMPRESS_GOPROXY),y)
+	export GO111MODULE=on
+	export GOPROXY=https://goproxy.cn
+endif
 
 GO_PKG_BUILD_VARS += GO111MODULE=auto
 TAR_OPTIONS:=--strip-components 1 $(TAR_OPTIONS)
@@ -62,6 +81,9 @@ define Build/Compile
 		$(GO_PKG_VARS) PATH=$$$$PATH:$(PKG_BUILD_DIR)/.go_work/build/bin \
 		$(MAKE) build-server; \
 	)
+ifeq ($(CONFIG_HOMEBOX_COMPRESS_UPX),y)
+	$(STAGING_DIR_HOST)/bin/upx --lzma --best $(PKG_BUILD_DIR)/build/server
+endif
 endef
 
 define Package/$(PKG_NAME)/install
