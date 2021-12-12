@@ -36,7 +36,7 @@ function container_status()
 		container_install = container_install,
 		container_running = container_running,
 		container_port = (port or 8096),
-		media_path = uci:get_first(keyword, keyword, "media_path", "/mnt/sda1/media"),
+		media_path = uci:get_first(keyword, keyword, "media_path", ""),
 		config_path = uci:get_first(keyword, keyword, "config_path", "/root/jellyfin/config"),
 		cache_path = uci:get_first(keyword, keyword, "cache_path", ""),
 	}
@@ -71,7 +71,7 @@ function install_container()
 	local port = luci.http.formvalue("port")
 
 	uci:tset(keyword, "@"..keyword.."[0]", {
-		media_path = media_path or "/mnt/sda1/media",
+		media_path = media_path or "",
 		config_path = config_path or "/root/jellyfin/config",
 		cache_path = cache_path or "",
 		port = port or "8096",
