@@ -25,7 +25,7 @@ define Package/$(PKG_NAME)
 	CATEGORY:=Network
 	SUBMENU:=Web Servers/Proxies
 	TITLE:=xunyou
-	DEPENDS:=
+	DEPENDS:=kmod-ipt-tproxy
 endef
 
 define Package/$(PKG_NAME)/description
