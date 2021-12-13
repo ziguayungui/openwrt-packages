@@ -285,7 +285,7 @@ backup() {
     #only backup non pre installed ipk
     cp ${IS_ROOT}/appdep.list ${IS_ROOT}/appdep_strip.list
     for pre_installed_pkg in `cat ${IS_ROOT}/appdep.list ${IS_ROOT}/pre_installed_package.list | sort -n | uniq -d`; do
-        sed -i '/'"$pre_installed_pkg"'/d' ${IS_ROOT}/appdep_strip.list
+        sed -i '/^'"$pre_installed_pkg"'$/d' ${IS_ROOT}/appdep_strip.list
     done
 
     rm -f $BACKUP_PATH/backup_istore_$date/appdepipk.list
