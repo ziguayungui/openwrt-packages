@@ -12,6 +12,17 @@ LUCI_PKGARCH:=all
 PKG_VERSION:=1.0
 PKG_RELEASE:=20
 
-include $(TOPDIR)/feeds/luci/luci.mk
+define Package/luci-app-zerotier/preinst
+if [ -z "$${IPKG_INSTROOT}" ]; then
+	[ -f /etc/init.d/zerotier ] && mv /etc/init.d/zerotier /etc/etc_initd_zerotier_backup
+fi
+endef
 
+define Package/luci-app-zerotier/postrm
+if [ -z "$${IPKG_INSTROOT}" ]; then
+	[ -f /etc/etc_initd_zerotier_backup ] && mv /etc/etc_initd_zerotier_backup /etc/init.d/zerotier
+fi
+endef
+
+include $(TOPDIR)/feeds/luci/luci.mk
 # call BuildPackage - OpenWrt buildroot signature
