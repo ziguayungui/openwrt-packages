@@ -52,7 +52,7 @@ endef
 $(eval $(call Download,sha256sum))
 
 define Build/Prepare
-	mv $(DL_DIR)/$(PKG_SOURCE).sha256 .
+	cp $(DL_DIR)/$(PKG_SOURCE).sha256 .
 	cp $(DL_DIR)/$(PKG_SOURCE) .
 	shasum -a 256 -c $(PKG_SOURCE).sha256
 	rm $(PKG_SOURCE).sha256 $(PKG_SOURCE)
