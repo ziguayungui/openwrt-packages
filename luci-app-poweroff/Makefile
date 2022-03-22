@@ -6,7 +6,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-poweroff
-PKG_VERSION:=20201112
+PKG_VERSION:=20200726
 PKG_RELEASE:=1
 LUCI_TITLE:=LuCI Support of PowerOff Router
 LUCI_PKGARCH:=all
